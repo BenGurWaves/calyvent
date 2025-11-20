@@ -148,6 +148,35 @@
     @media (max-width:640px){ .clients{grid-template-columns:repeat(2,1fr)} .team-photo{height:140px} .brand.hero-title{font-size:clamp(48px, 14vw, 96px)} .hero-line{font-size:20px} .menu-panel{width:92vw} .menu-nav a{font-size:16px} }
     @media (max-width:420px){ body{font-size:16px} section{padding:48px 0} .team-photo{height:120px} .team-grid{grid-template-columns:1fr} }
   </style>
+  <style>
+/* Accordion + / – signs – make them clearly visible */
+.acc-trigger span[aria-hidden="true"] {
+    color: #E5E5E5 !important;        /* platinum – same as your main text */
+    background: #0A3D2A;              /* deep emerald background so they pop */
+    width: 32px;
+    height: 32px;
+    line-height: 30px !important;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: 300;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 16px;
+    transition: all 0.3s ease;
+}
+
+.acc-trigger:hover span[aria-hidden="true"] {
+    background: #0F4D3A;   /* slightly lighter emerald on hover */
+    transform: scale(1.1);
+}
+
+/* Open state = show − instead of + */
+.acc-trigger[aria-expanded="true"] span[aria-hidden="true"] {
+    content: "−";
+    line-height: 28px !important;
+}
+</style>
 </head>
 <body>
   <!-- Header & menu -->
