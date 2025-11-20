@@ -333,22 +333,24 @@
     const SUPABASE_URL = "https://offrohhavllnldqrofck.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mZnJvaGhhdmxsbmxkcXJvZmNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NjIzNzcsImV4cCI6MjA3OTIzODM3N30.fyUPt8W1Di9dFXKBqDAO0VOaMEmng2EQOPFyLE2RzIc";
 
-    // Correct, canonical initialization using the global `supabase` from the UMD build
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Correct initialization — use the global UMD export on window to avoid TDZ/shadowing
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // Insert helper
-    async function insertCalyventForm({ name, email, message, revenue }){
-      try{
-        const payload = { name, email, message, revenue };
-        const { data, error } = await supabase.from('calyventform').insert([ payload ]);
-        if(error) throw error;
-        console.log('Supabase insert success:', data);
-        return { success:true, data };
-      } catch(err){
-        console.error('Supabase insert error:', err);
-        return { success:false, error: err };
-      }
-    }
+// Insert helper (uses supabaseClient)
+async function insertCalyventForm({ name, email, message, revenue }){
+  try{
+    const payload = { name, email, message, revenue };
+    const { data, error } = await supabaseClient
+      .from('calyventform')
+      .insert([ payload ]);
+    if(error) throw error;
+    console.log('Supabase insert success:', data);
+    return { success:true, data };
+  } catch(err){
+    console.error('Supabase insert error:', err);
+    return { success:false, error: err };
+  }
+}
   </script>
 
   <script>
