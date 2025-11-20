@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calyvent — Entertainment Contracts & Label Services</title>
+  <meta name="description" content="Calyvent — Quiet, untouchable luxury for creators. Entertainment contracts and label services with clarity, advantage, forever." />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&family=Source+Serif+4:opsz,wght@12..72,400;12..72,500&display=swap" rel="stylesheet">
+  <style>
+    /* Exact palette and typography (same as before) */
+    :root{
+      --matte-black:#0F0F0F;
+      --off-black:#181818;
+      --platinum:#E5E5E5;
+      --platinum-hl:#F5F5F5;
+      --emerald:#0A3D2A;
+      --white:#FFFFFF;
+      --max-width:1440px;
+      --site-padding:28px;
+      --logo-letter-spacing:0.15em;
+      --heading-letter-spacing:0.06em;
+      --line-height:1.72;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;background:var(--matte-black);color:var(--platinum);
+      font-family:"Source Serif 4", Georgia, serif;-webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;line-height:var(--line-height);font-size:18px;
+    }
+    a{color:inherit;text-decoration:none} img{max-width:100%;height:auto;display:block}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--site-padding)}
+    header.sitebar{position:fixed;left:0;right:0;top:0;z-index:90;display:flex;justify-content:flex-end;padding:18px var(--site-padding);pointer-events:none;transition:background-color 280ms ease,opacity 280ms ease,transform 280ms ease}
+    header.sitebar.visible{background:rgba(15,15,15,0.95);pointer-events:auto;backdrop-filter:blur(2px)}
+    .hamburger{width:48px;height:48px;border-radius:8px;border:1px solid rgba(229,229,229,0.06);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--platinum);background:transparent;padding:6px}
+    .menu-panel{position:fixed;top:0;right:0;height:100vh;width:360px;max-width:92vw;background:var(--off-black);transform:translateX(110%);transition:transform 420ms cubic-bezier(.2,.9,.2,1);z-index:95;padding:48px 32px;box-shadow:-40px 0 120px rgba(0,0,0,0.6)}
+    .menu-panel.open{transform:translateX(0)}
+    .menu-logo{font-family:"Crimson Pro", Georgia, serif;font-weight:600;letter-spacing:var(--logo-letter-spacing);color:var(--platinum);font-size:20px;text-align:center}
+    .menu-tag{font-family:"Playfair Display",serif;font-style:italic;text-align:center;color:var(--platinum);opacity:0.95;margin-top:6px;font-size:13px}
+    .menu-nav{margin-top:28px;display:flex;flex-direction:column;gap:14px}
+    .menu-nav a{font-family:"Crimson Pro", Georgia, serif;letter-spacing:0.08em;font-size:18px;padding:10px 6px;color:var(--platinum)}
+    .menu-legal{margin-top:28px;color:rgba(229,229,229,0.62);font-size:13px;text-align:center}
+    .logo-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}
+    .brand{font-family:"Crimson Pro", Georgia, serif;font-weight:600;letter-spacing:var(--logo-letter-spacing);color:var(--platinum);margin:0;line-height:1}
+    .brand-small{font-family:"Playfair Display",serif;font-style:italic;color:var(--platinum);opacity:0.95}
+    .hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:48px 0;position:relative;background:var(--matte-black)}
+    .hero-inner{max-width:980px;padding:0 var(--site-padding)}
+    .brand.hero-title{font-size:clamp(72px, 9vw, 160px);line-height:0.92}
+    .hero-line{font-family:"Playfair Display",serif;font-style:italic;font-size:clamp(20px,3.2vw,48px);margin-top:18px;color:var(--platinum);letter-spacing:0.035em}
+    .accent-underline{width:0;height:2px;background:var(--emerald);margin:28px auto 0;border-radius:2px;opacity:0;transition:width 1100ms ease 480ms,opacity 1200ms ease 480ms}
+    .accent-underline.show{width:160px;opacity:1}
+    .cta{margin-top:52px;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 28px;border-radius:10px;border:1px solid rgba(229,229,229,0.12);background:transparent;color:var(--platinum);font-family:"Crimson Pro",serif;font-weight:500;letter-spacing:0.08em;cursor:pointer;position:relative;overflow:hidden;transition:transform 220ms ease}
+    .cta:focus{outline:2px solid rgba(229,229,229,0.06);outline-offset:4px}
+    .cta::before{content:"";position:absolute;top:0;left:0;height:100%;width:0;background:var(--emerald);z-index:0;transition:width 420ms ease}
+    .cta span{position:relative;z-index:2}
+    .cta:hover{transform:scale(1.02)}
+    .cta:hover::before{width:100%}
+    .section-title{font-family:"Crimson Pro",serif;font-weight:500;letter-spacing:var(--heading-letter-spacing);font-size:24px;margin:0}
+    .philos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:26px}
+    .philo-card{background:transparent;padding:28px;border-radius:10px;border:1px solid rgba(229,229,229,0.04)}
+    .philo-card h3{margin:0;font-family:"Crimson Pro",serif;font-size:20px;letter-spacing:0.06em}
+    .philo-card p{margin-top:10px;color:rgba(229,229,229,0.92);font-size:15px;font-family:"Source Serif 4",Georgia,serif;line-height:1.72}
+    .services-wrap{background:var(--off-black);padding:48px;border-radius:10px;margin-top:18px}
+    .service-line{display:flex;align-items:center;padding:16px 0;border-bottom:1px solid rgba(229,229,229,0.02)}
+    .service-line:last-child{border-bottom:0}
+    .service-rule{height:2px;width:56px;background:var(--emerald);opacity:0.12;border-radius:2px;margin-right:18px}
+    .service-name{font-family:"Crimson Pro",serif;font-size:18px;letter-spacing:0.04em}
+    .clients{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:28px;align-items:center}
+    .client-item{display:flex;align-items:center;justify-content:center;padding:18px;border-radius:8px;filter:grayscale(100%) contrast(.9) brightness(.98);transition:filter 420ms ease,transform 320ms ease}
+    .client-item:hover{filter:none;transform:translateY(-4px)}
+    .client-item svg{width:100%;height:36px;fill:var(--platinum);opacity:0.95}
+    .contact-wrap{max-width:720px;margin:38px auto 0;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));padding:28px;border-radius:10px;border:1px solid rgba(229,229,229,0.04)}
+    .form-row{display:flex;gap:12px}
+    .field{display:flex;flex-direction:column;margin-bottom:12px}
+    label{font-size:13px;color:rgba(229,229,229,0.86);margin-bottom:6px}
+    input[type="text"],input[type="email"],select,textarea{background:transparent;border:1px solid rgba(229,229,229,0.04);padding:12px 14px;border-radius:8px;color:var(--platinum);font-family:"Source Serif 4",serif;font-size:15px}
+    textarea{min-height:140px;resize:vertical}
+    .submit-row{display:flex;justify-content:flex-end}
+    .btn-submit{padding:12px 18px;border-radius:10px;border:1px solid rgba(229,229,229,0.06);background:transparent;color:var(--platinum);font-family:"Crimson Pro",serif;cursor:pointer}
+    .btn-submit:hover{transform:scale(1.02)}
+    .btn-submit:disabled{opacity:0.6;cursor:default}
+    footer.sitefoot{padding:36px 0;text-align:center;color:rgba(229,229,229,0.7);font-size:13px}
+    .accordion{margin-top:20px;border-radius:8px;overflow:hidden;border:1px solid rgba(229,229,229,0.04)}
+    .acc-item{border-bottom:1px solid rgba(229,229,229,0.02)}
+    .acc-trigger{display:flex;justify-content:space-between;align-items:center;padding:18px;background:transparent;cursor:pointer}
+    .acc-trigger h4{margin:0;font-family:"Crimson Pro",serif;font-size:16px}
+    .acc-panel{max-height:0;overflow:hidden;padding:0 18px;transition:max-height 420ms ease,padding 420ms ease}
+    .acc-panel.open{padding:18px;max-height:400px}
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+    .team-card{background:transparent;padding:14px;border-radius:8px;border:1px solid rgba(229,229,229,0.04);display:flex;flex-direction:column;gap:12px;align-items:center}
+    .team-photo{width:100%;height:160px;background:linear-gradient(180deg, rgba(229,229,229,0.06), rgba(229,229,229,0.02));filter:grayscale(100%) contrast(.9);border-radius:6px;display:block}
+    .view{display:block}
+    .page{display:none;padding-top:64px}
+    .page.active{display:block}
+    .fade{opacity:0;transform:translateY(12px);transition:opacity 900ms ease,transform 900ms ease}
+    .fade.in{opacity:1;transform:none}
+    a.link-emerald:hover{color:var(--emerald);text-decoration:underline}
+    @media (max-width:1100px){ .clients{grid-template-columns:repeat(3,1fr)} .team-grid{grid-template-columns:repeat(2,1fr)} .philos-grid{grid-template-columns:1fr} }
+    @media (max-width:640px){ .clients{grid-template-columns:repeat(2,1fr)} .team-photo{height:140px} .brand.hero-title{font-size:clamp(48px, 14vw, 96px)} .hero-line{font-size:20px} .menu-panel{width:92vw} .menu-nav a{font-size:16px} }
+    @media (max-width:420px){ body{font-size:16px} section{padding:48px 0} .team-photo{height:120px} .team-grid{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <!-- Favicon (CV monogram) -->
+  <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="100%" height="100%" fill="%230F0F0F"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Cinzel, serif" font-weight="700" font-size="30" fill="%23E5E5E5">CV</text></svg>'>
+
+  <!-- Header & menu -->
+  <header class="sitebar" role="banner" aria-hidden="true">
+    <div class="container" style="display:flex;justify-content:flex-end">
+      <button class="hamburger" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg width="18" height="14" viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="18" height="2" rx="1" fill="#E5E5E5"/>
+          <rect y="6" width="18" height="2" rx="1" fill="#E5E5E5"/>
+          <rect y="12" width="18" height="2" rx="1" fill="#E5E5E5"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <aside class="menu-panel" id="menu" aria-hidden="true">
+    <div class="menu-logo">Calyvent</div>
+    <div class="menu-tag">Clarity. Advantage. Forever.</div>
+    <nav class="menu-nav" role="navigation" aria-label="Primary">
+      <a href="/" data-path="/" class="menu-link">Home</a>
+      <a href="/services" data-path="/services" class="menu-link">Services</a>
+      <a href="/about" data-path="/about" class="menu-link">About</a>
+      <a href="/contact" data-path="/contact" class="menu-link">Contact</a>
+      <a href="/legal" data-path="/legal" class="menu-link">Legal</a>
+    </nav>
+    <div class="menu-legal">© 2025 Calyvent. All rights reserved.</div>
+  </aside>
+
+  <main class="container" id="app" role="main">
+    <!-- HOME -->
+    <section id="home" class="page active" aria-labelledby="home-title">
+      <div class="hero">
+        <div class="hero-inner">
+          <div class="logo-wrap">
+            <h1 class="brand hero-title">Calyvent</h1>
+            <div class="brand-small">Clarity. Advantage. Forever.</div>
+          </div>
+
+          <div class="hero-line fade" style="margin-top:18px">The fine print finally works for you.</div>
+          <div class="accent-underline" id="hero-underline" aria-hidden="true"></div>
+
+          <div style="margin-top:52px" class="fade">
+            <button class="cta" id="cta-inquire" aria-controls="contact" aria-haspopup="true"><span>Inquire Privately</span></button>
+          </div>
+        </div>
+      </div>
+
+      <section style="padding-top:48px" aria-labelledby="philosophy-title">
+        <h2 id="philosophy-title" class="section-title">Where creators keep what they create.</h2>
+        <div class="philos-grid">
+          <div class="philo-card fade">
+            <h3>Clarity</h3>
+            <p>Contracts drafted with transparency and precise accounting so rights remain intact and visible.</p>
+          </div>
+          <div class="philo-card fade">
+            <h3>Protection</h3>
+            <p>Structures built to prevent erosion of value — rigorous, anticipatory, discreet.</p>
+          </div>
+          <div class="philo-card fade">
+            <h3>Legacy</h3>
+            <p>Long-term stewardship and transfer planning that respects artistic intention and future heirs.</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="services-title" style="padding-top:40px">
+        <h3 id="services-title" class="section-title">Services</h3>
+        <div class="services-wrap fade" role="list">
+          <div class="service-line" role="listitem"><div class="service-rule" aria-hidden="true"></div><div class="service-name">Master &amp; Publishing Administration</div></div>
+          <div class="service-line" role="listitem"><div class="service-rule" aria-hidden="true"></div><div class="service-name">Royalty Recovery &amp; Audit</div></div>
+          <div class="service-line" role="listitem"><div class="service-rule" aria-hidden="true"></div><div class="service-name">Label Services &amp; Distribution Partnerships</div></div>
+          <div class="service-line" role="listitem"><div class="service-rule" aria-hidden="true"></div><div class="service-name">Contract Negotiation &amp; Legal</div></div>
+          <div class="service-line" role="listitem"><div class="service-rule" aria-hidden="true"></div><div class="service-name">360 Deal Structuring</div></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="clients-title" style="padding-top:40px">
+        <h3 id="clients-title" class="section-title">Selected Representation</h3>
+        <div class="clients fade" aria-hidden="false">
+          <div class="client-item" title="Aurelia"><svg viewBox="0 0 200 40" preserveAspectRatio="xMidYMid meet"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Crimson Pro, serif" font-size="20">AURELIA</text></svg></div>
+          <div class="client-item" title="Morrow"><svg viewBox="0 0 200 40"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Crimson Pro, serif" font-size="20">MORROW</text></svg></div>
+          <div class="client-item" title="Alcove"><svg viewBox="0 0 200 40"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Crimson Pro, serif" font-size="20">ALCOVE</text></svg></div>
+          <div class="client-item" title="Ramsay"><svg viewBox="0 0 200 40"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Crimson Pro, serif" font-size="20">RAMSAY</text></svg></div>
+          <div class="client-item" title="Vellum"><svg viewBox="0 0 200 40"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Crimson Pro, serif" font-size="20">VELLUM</text></svg></div>
+          <div class="client-item" title="Osiris"><svg viewBox="0 0 200 40"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Crimson Pro, serif" font-size="20">OSIRIS</text></svg></div>
+          <div class="client-item" title="Hearth"><svg viewBox="0 0 200 40"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Crimson Pro, serif" font-size="20">HEARTH</text></svg></div>
+          <div class="client-item" title="Pavon"><svg viewBox="0 0 200 40"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Crimson Pro, serif" font-size="20">PAVON</text></svg></div>
+          <div class="client-item" title="Lumen"><svg viewBox="0 0 200 40"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Crimson Pro, serif" font-size="20">LUMEN</text></svg></div>
+          <div class="client-item" title="Vireo"><svg viewBox="0 0 200 40"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Crimson Pro, serif" font-size="20">VIREO</text></svg></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="inquire-title" style="padding-top:48px;padding-bottom:48px">
+        <h3 id="inquire-title" class="section-title">Contact / Inquire</h3>
+        <div class="contact-wrap fade">
+          <form id="inquiry-form" novalidate>
+            <div class="form-row" style="flex-direction:column">
+              <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" class="input" required></div>
+              <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" class="input" required></div>
+
+              <!-- Revenue exact options requested -->
+              <div class="field">
+                <label for="revenue">Expected Annual Revenue</label>
+                <select id="revenue" name="revenue" required>
+                  <option value="">Select</option>
+                  <option value="0 but want (custom in text box)">0 but want (custom in text box)</option>
+                  <option value="10,000">10,000</option>
+                  <option value="50,000">50,000</option>
+                  <option value="100,000">100,000</option>
+                  <option value="custom (write in message box)">custom (write in message box)</option>
+                </select>
+              </div>
+
+              <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Brief description (no attachments)"></textarea></div>
+            </div>
+            <div class="submit-row">
+              <button type="submit" id="inquiry-submit" class="btn-submit">Submit Private Inquiry</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <footer class="sitefoot">
+        © 2025 Calyvent. All rights reserved. — <a href="/legal" class="link-emerald" data-path="/legal">Privacy</a> — <a href="/legal" class="link-emerald" data-path="/legal">Terms</a>
+      </footer>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="page" aria-labelledby="services-page-title">
+      <div style="padding-top:36px"></div>
+      <h1 id="services-page-title" class="section-title">Services — Detailed</h1>
+      <p style="margin-top:12px;color:rgba(229,229,229,0.9);max-width:900px">Focused services designed to preserve value and craft durable partnership arrangements. Below are the primary offerings with a concise explanation of approach.</p>
+
+      <div class="accordion" id="services-accordion" role="list">
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false" data-target="acc-1"><h4>Master &amp; Publishing Administration</h4><span aria-hidden="true">+</span></button><div class="acc-panel" id="acc-1"><p>Full-scope administration of master and publishing rights with exact reporting, custom ledger reconciliation and global collection partners. We avoid opaque sub-licenses and maintain transparency.</p></div></div>
+
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false" data-target="acc-2"><h4>Royalty Recovery &amp; Audit</h4><span aria-hidden="true">+</span></button><div class="acc-panel" id="acc-2"><p>Comprehensive audit services to reclaim underpaid royalties, combined with continuous monitoring to prevent future leakage.</p></div></div>
+
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false" data-target="acc-3"><h4>Label Services &amp; Distribution Partnerships</h4><span aria-hidden="true">+</span></button><div class="acc-panel" id="acc-3"><p>Bespoke label service agreements and distribution arrangements that align incentives and preserve creative ownership where possible.</p></div></div>
+
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false" data-target="acc-4"><h4>Contract Negotiation &amp; Legal</h4><span aria-hidden="true">+</span></button><div class="acc-panel" id="acc-4"><p>Negotiation with a focus on durable, enforceable language — remove ambiguity, reduce future disputes, protect long-term revenue.</p></div></div>
+
+        <div class="acc-item"><button class="acc-trigger" aria-expanded="false" data-target="acc-5"><h4>360 Deal Structuring</h4><span aria-hidden="true">+</span></button><div class="acc-panel" id="acc-5"><p>Tailored 360 structures where alignment is appropriate — strict carve-outs, clear recoupment and transparent accounting principles.</p></div></div>
+      </div>
+
+      <div style="margin-top:36px"><button class="cta" id="back-home" style="padding:10px 18px">Return</button></div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="page" aria-labelledby="about-title">
+      <div style="padding-top:36px"></div>
+      <h1 id="about-title" class="section-title">About</h1>
+      <p style="margin-top:12px;max-width:880px;color:rgba(229,229,229,0.92)">Established in spirit, built for tomorrow. Calyvent operates at the intersection of stewardship and strategic counsel — decades of accumulated practice reimagined for the modern creator. We prefer restraint, precision, and the absence of noise.</p>
+
+      <h3 style="margin-top:28px">Team</h3>
+      <div class="team-grid" role="list">
+        <div class="team-card fade" role="listitem"><div class="team-photo" aria-hidden="true"></div><div style="text-align:center"><strong style="font-family:Crimson Pro, serif">E. Horvath</strong><div style="font-size:13px;color:rgba(229,229,229,0.8)">Managing Partner</div></div></div>
+        <div class="team-card fade" role="listitem"><div class="team-photo" aria-hidden="true"></div><div style="text-align:center"><strong style="font-family:Crimson Pro, serif">M. Lys</strong><div style="font-size:13px;color:rgba(229,229,229,0.8)">Head of Administration</div></div></div>
+        <div class="team-card fade" role="listitem"><div class="team-photo" aria-hidden="true"></div><div style="text-align:center"><strong style="font-family:Crimson Pro, serif">R. Vale</strong><div style="font-size:13px;color:rgba(229,229,229,0.8)">Legal Counsel</div></div></div>
+      </div>
+
+      <div style="margin-top:36px"><button class="cta" id="about-back">Return</button></div>
+    </section>
+
+    <!-- CONTACT (full-screen style page) -->
+    <section id="contact" class="page" aria-labelledby="contact-title">
+      <div style="padding-top:36px"></div>
+      <h1 id="contact-title" class="section-title">Contact — Private Inquiry</h1>
+      <p style="margin-top:12px;max-width:820px;color:rgba(229,229,229,0.9)">Use the form below for private inquiries. We respond selectively and directly.</p>
+
+      <div class="contact-wrap" style="margin-top:18px">
+        <form id="contact-form" novalidate>
+          <div class="field"><label for="full">Full name</label><input id="full" name="full" type="text" required></div>
+          <div class="field"><label for="mail">Email</label><input id="mail" name="mail" type="email" required></div>
+
+          <div class="field">
+            <label for="revenue2">Expected Annual Revenue</label>
+            <select id="revenue2" name="revenue2" required>
+              <option value="">Select</option>
+              <option value="0 but want (custom in text box)">0 but want (custom in text box)</option>
+              <option value="10,000">10,000</option>
+              <option value="50,000">50,000</option>
+              <option value="100,000">100,000</option>
+              <option value="custom (write in message box)">custom (write in message box)</option>
+            </select>
+          </div>
+
+          <div class="field"><label for="msg">Message</label><textarea id="msg" name="msg" placeholder="Brief description (no attachments)"></textarea></div>
+          <div style="display:flex;justify-content:flex-end"><button class="btn-submit" id="contact-submit" type="submit">Submit Private Inquiry</button></div>
+        </form>
+      </div>
+
+      <div style="margin-top:28px"><button class="cta" id="contact-return">Return</button></div>
+    </section>
+
+    <!-- LEGAL -->
+    <section id="legal" class="page" aria-labelledby="legal-title">
+      <div style="padding-top:36px"></div>
+      <h1 id="legal-title" class="section-title">Legal</h1>
+      <p style="margin-top:12px;color:rgba(229,229,229,0.9);max-width:880px">Placeholder for future legal text and privacy policy. This section will contain standard terms, privacy, and notice language for Calyvent.</p>
+      <div style="margin-top:36px"><button class="cta" id="legal-return">Return</button></div>
+    </section>
+  </main>
+
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+
+  <script>
+    /* Configuration: Supabase URL & anon key exactly as provided */
+    const SUPABASE_URL = "https://offrohhavllnldqrofck.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mZnJvaGhhdmxsbmxkcXJvZmNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NjIzNzcsImV4cCI6MjA3OTIzODM3N30.fyUPt8W1Di9dFXKBqDAO0VOaMEmng2EQOPFyLE2RzIc";
+
+    // Initialize supabase client
+    const supabase = supabaseJs.createClient
+      ? supabaseJs.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+      : (window.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY));
+
+    // Simple helper
+    const qs = (s, ctx=document) => ctx.querySelector(s);
+
+    // Fade-in observer
+    function observeFades(){
+      const faders = Array.from(document.querySelectorAll('.fade'));
+      const obs = new IntersectionObserver((entries, o) => {
+        entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); o.unobserve(en.target); }});
+      }, {threshold:0.08});
+      faders.forEach(f => { f.classList.remove('in'); obs.observe(f); });
+    }
+    observeFades();
+
+    // Menu and routing (unchanged)
+    (function(){
+      const header = document.querySelector('header.sitebar');
+      const menuBtn = document.getElementById('menu-toggle');
+      const menu = document.getElementById('menu');
+      const menuLinks = Array.from(document.querySelectorAll('.menu-link'));
+      const pages = Array.from(document.querySelectorAll('.page'));
+      const cta = document.getElementById('cta-inquire');
+      const heroUnderline = document.getElementById('hero-underline');
+
+      function showPath(path, replace=false){
+        const p = (path || '/').replace(/\/+$/,'') || '/';
+        pages.forEach(pg => {
+          if('/' + pg.id === p || (p === '/' && pg.id === 'home')) pg.classList.add('active'); else pg.classList.remove('active');
+        });
+        const titleMap = {'/':'Calyvent — Entertainment Contracts & Label Services','/services':'Services — Calyvent','/about':'About — Calyvent','/contact':'Contact — Calyvent','/legal':'Legal — Calyvent'};
+        document.title = titleMap[p] || titleMap['/'];
+        if(!replace) history.pushState({path:p}, '', p);
+        closeMenu();
+        window.scrollTo({top:0,behavior:'smooth'});
+        observeFades();
+      }
+
+      function openMenu(){ menu.classList.add('open'); menu.setAttribute('aria-hidden','false'); menuBtn.setAttribute('aria-expanded','true'); }
+      function closeMenu(){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); menuBtn.setAttribute('aria-expanded','false'); }
+      function toggleMenu(){ menu.classList.toggle('open'); const open = menu.classList.contains('open'); menu.setAttribute('aria-hidden', open ? 'false' : 'true'); menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+      menuBtn.addEventListener('click', () => toggleMenu());
+      menuLinks.forEach(a => { a.addEventListener('click', (e) => { e.preventDefault(); const p = a.getAttribute('data-path') || a.getAttribute('href'); showPath(p); }); });
+
+      cta && cta.addEventListener('click', () => showPath('/contact'));
+      const backButtons = document.querySelectorAll('#back-home, #about-back, #contact-return, #legal-return');
+      backButtons.forEach(b => b.addEventListener('click', ()=> showPath('/')));
+      window.addEventListener('scroll', () => { if(window.scrollY > 80) header.classList.add('visible'); else header.classList.remove('visible'); }, {passive:true});
+      window.addEventListener('load', () => { setTimeout(()=> heroUnderline.classList.add('show'), 380); });
+      window.addEventListener('popstate', (e) => { showPath(location.pathname, true); });
+      showPath(location.pathname, true);
+
+      // Accordion
+      const accTriggers = Array.from(document.querySelectorAll('.acc-trigger'));
+      accTriggers.forEach(btn => { btn.addEventListener('click', () => {
+        const target = document.getElementById(btn.getAttribute('data-target'));
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        accTriggers.forEach(t => { t.setAttribute('aria-expanded','false'); const p = document.getElementById(t.getAttribute('data-target')); if(p){ p.classList.remove('open'); }});
+        if(!expanded){ btn.setAttribute('aria-expanded','true'); if(target){ target.classList.add('open'); } } else { btn.setAttribute('aria-expanded','false'); if(target){ target.classList.remove('open'); } }
+      }); });
+
+      // Escape closes menu
+      window.addEventListener('keydown', (ev) => { if(ev.key === 'Escape'){ closeMenu(); } });
+    })();
+
+    /* --- Supabase form handling for both forms --- */
+    // Helper to insert into 'calyventform'
+    async function insertCalyventForm({ name, email, message, revenue }){
+      try{
+        const payload = { name, email, message, revenue };
+        const { data, error } = await supabase
+          .from('calyventform')
+          .insert([ payload ]);
+        if(error) throw error;
+        return { success:true, data };
+      } catch(err){
+        console.error('Supabase insert error:', err);
+        return { success:false, error: err };
+      }
+    }
+
+    // Hook homepage inquiry form
+    (function(){
+      const form = document.getElementById('inquiry-form');
+      if(!form) return;
+      const submitBtn = document.getElementById('inquiry-submit');
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        const name = (form.querySelector('#name')||{value:''}).value.trim();
+        const email = (form.querySelector('#email')||{value:''}).value.trim();
+        const revenue = (form.querySelector('#revenue')||{value:''}).value;
+        const message = (form.querySelector('#message')||{value:''}).value.trim();
+        if(!name || !email || !revenue){
+          submitBtn.textContent = 'Complete required fields';
+          setTimeout(()=> submitBtn.textContent = 'Submit Private Inquiry', 1400);
+          return;
+        }
+        submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
+        const res = await insertCalyventForm({ name, email, message, revenue });
+        if(res.success){
+          submitBtn.textContent = 'Submitted';
+          form.reset();
+          setTimeout(()=> { submitBtn.disabled = false; submitBtn.textContent = 'Submit Private Inquiry'; }, 1400);
+        } else {
+          submitBtn.disabled = false; submitBtn.textContent = 'Error';
+          setTimeout(()=> submitBtn.textContent = 'Submit Private Inquiry', 1600);
+        }
+      });
+    })();
+
+    // Hook contact page form
+    (function(){
+      const form = document.getElementById('contact-form');
+      if(!form) return;
+      const submitBtn = document.getElementById('contact-submit');
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        const name = (form.querySelector('#full')||{value:''}).value.trim();
+        const email = (form.querySelector('#mail')||{value:''}).value.trim();
+        const revenue = (form.querySelector('#revenue2')||{value:''}).value;
+        const message = (form.querySelector('#msg')||{value:''}).value.trim();
+        if(!name || !email || !revenue){
+          submitBtn.textContent = 'Complete required fields';
+          setTimeout(()=> submitBtn.textContent = 'Submit Private Inquiry', 1400);
+          return;
+        }
+        submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
+        const res = await insertCalyventForm({ name, email, message, revenue });
+        if(res.success){
+          submitBtn.textContent = 'Submitted';
+          form.reset();
+          setTimeout(()=> { submitBtn.disabled = false; submitBtn.textContent = 'Submit Private Inquiry'; }, 1400);
+        } else {
+          submitBtn.disabled = false; submitBtn.textContent = 'Error';
+          setTimeout(()=> submitBtn.textContent = 'Submit Private Inquiry', 1600);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
