@@ -53,26 +53,39 @@
       --hero-desktop: url('/calyventbakk.png');
       --hero-fallback: url('/calyventbakk.png');
     }
-    .hero{
-      min-height:100vh;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      padding:48px 0;
-      position:relative;
-      background-color:var(--matte-black);
-      background-image: linear-gradient(rgba(15,15,15,0.58), rgba(15,15,15,0.58)), var(--hero-mobile);
-      background-repeat:no-repeat;
-      background-size:cover;
-      background-position:center 100%;
-      z-index:0;
-    }
-    @media (min-width:900px){
-      .hero{ background-image: linear-gradient(rgba(15,15,15,0.58), rgba(15,15,15,0.58)), var(--hero-desktop); background-position:center 100%;}
-    }
-    @media (min-width:1800px){
-      .hero{ background-image: linear-gradient(rgba(15,15,15,0.58), rgba(15,15,15,0.58)), var(--hero-fallback); background-position:center center;}
-    }
+/* HERO — force full cover and center-crop */
+.hero{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 48px 0;
+  position: relative;
+  background-color: var(--matte-black);
+  /* gradient overlay then image */
+  background-image: linear-gradient(rgba(15,15,15,0.58), rgba(15,15,15,0.58)), var(--hero-mobile);
+  background-repeat: no-repeat;
+  background-size: cover;          /* <-- ensure full coverage */
+  background-position: center center; /* <-- center-crop the image */
+  z-index: 0;
+}
+
+/* keep the same behavior on larger breakpoints (explicitly set) */
+@media (min-width:900px){
+  .hero{
+    background-image: linear-gradient(rgba(15,15,15,0.58), rgba(15,15,15,0.58)), var(--hero-desktop);
+    background-position: center center;
+    background-size: cover;
+  }
+}
+@media (min-width:1800px){
+  .hero{
+    background-image: linear-gradient(rgba(15,15,15,0.58), rgba(15,15,15,0.58)), var(--hero-fallback);
+    background-position: center center;
+    background-size: cover;
+  }
+}
+
 
     /* safe-area padding fixes clipping */
     .hero-inner{max-width:980px;padding:calc(env(safe-area-inset-top, 24px) + 24px) var(--site-padding) calc(env(safe-area-inset-bottom,24px) + 24px);position:relative;z-index:2}
