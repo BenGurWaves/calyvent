@@ -329,26 +329,52 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
 
   <script>
-    /* Supabase config (exact values you provided) */
-    const SUPABASE_URL = "https://offrohhavllnldqrofck.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mZnJvaGhhdmxsbmxkcXJvZmNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NjIzNzcsImV4cCI6MjA3OTIzODM3N30.fyUPt8W1Di9dFXKBqDAO0VOaMEmng2EQOPFyLE2RzIc";
+ /* --- Supabase: safe init (poll until UMD global is ready) --- */
+let supabaseClient = null;
 
-    // Correct initialization — use the global UMD export on window to avoid TDZ/shadowing
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const SUPABASE_URL = "https://offrohhavllnldqrofck.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mZnJvaGhhdmxsbmxkcXJvZmNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NjIzNzcsImV4cCI6MjA3OTIzODM3N30.fyUPt8W1Di9dFXKBqDAO0VOaMEmng2EQOPFyLE2RzIc";
 
-// Insert helper (uses supabaseClient)
+/**
+ * Wait for the Supabase UMD global to appear, then create the client.
+ * Polling is safe and tiny; this avoids any temporal-dead-zone or ordering issues.
+ */
+(function initSupabaseWhenReady(){
+  try {
+    if (window && window.supabase && typeof window.supabase.createClient === 'function') {
+      // create a dedicated client variable (do not shadow 'supabase' global)
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      console.log('Supabase initialized (supabaseClient).');
+      return;
+    }
+  } catch (err) {
+    // fall through to retry
+  }
+  // try again in 150ms until available (will stop once created)
+  setTimeout(initSupabaseWhenReady, 150);
+})();
+
+/* Insert helper that waits for the client — returns error if not ready yet */
 async function insertCalyventForm({ name, email, message, revenue }){
-  try{
+  // defensive: ensure the supabase client is ready
+  if (!supabaseClient) {
+    const err = new Error('Supabase client not initialized yet');
+    console.warn(err.message);
+    return { success: false, error: err };
+  }
+
+  try {
     const payload = { name, email, message, revenue };
     const { data, error } = await supabaseClient
       .from('calyventform')
       .insert([ payload ]);
-    if(error) throw error;
+
+    if (error) throw error;
     console.log('Supabase insert success:', data);
-    return { success:true, data };
-  } catch(err){
+    return { success: true, data };
+  } catch (err) {
     console.error('Supabase insert error:', err);
-    return { success:false, error: err };
+    return { success: false, error: err };
   }
 }
   </script>
