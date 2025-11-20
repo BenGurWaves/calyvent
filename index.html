@@ -7,8 +7,10 @@
   <meta name="description" content="Calyvent — Quiet, untouchable luxury for creators. Entertainment contracts and label services with clarity, advantage, forever." />
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Crimson+Pro:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&family=Source+Serif+4:opsz,wght@12..72,400;12..72,500&display=swap" rel="stylesheet">
+  <!-- Browser tab icon using your provided vertical logo file -->
+  <link rel="icon" href="/Calyvent Logo possiblly.jpg" />
   <style>
-    /* Palette + typography (unchanged) */
+    /* Exact palette and typography */
     :root{
       --matte-black:#0F0F0F;
       --off-black:#181818;
@@ -28,7 +30,6 @@
       margin:0;background:var(--matte-black);color:var(--platinum);
       font-family:"Source Serif 4", Georgia, serif;-webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;line-height:var(--line-height);font-size:18px;
-      -webkit-font-feature-settings: "kern" 1; font-feature-settings: "kern" 1;
     }
     a{color:inherit;text-decoration:none} img{max-width:100%;height:auto;display:block}
     .container{max-width:var(--max-width);margin:0 auto;padding:0 var(--site-padding)}
@@ -45,12 +46,12 @@
     .logo-wrap{display:flex;flex-direction:column;align-items:center;gap:6px}
     .brand{font-family:"Crimson Pro", Georgia, serif;font-weight:600;letter-spacing:var(--logo-letter-spacing);color:var(--platinum);margin:0;line-height:1}
     .brand-small{font-family:"Playfair Display",serif;font-style:italic;color:var(--platinum);opacity:0.95}
-    /* ---------- HERO with background images ---------- */
-    /* Images placed in repo under /assets/ (see instructions below) */
+
+    /* Hero backgrounds using exact filenames at repo root (Netlify serves these) */
     :root{
-      --hero-mobile: url('/assets/Calyventbak3.jpg');
-      --hero-desktop: url('/assets/Calyventbak2.jpg');
-      --hero-fallback: url('/assets/Calyvent background.jpg');
+      --hero-mobile: url('/Calyventbak3.jpg');
+      --hero-desktop: url('/Calyventbak2.jpg');
+      --hero-fallback: url('/Calyvent background.jpg');
     }
     .hero{
       min-height:100vh;
@@ -63,10 +64,9 @@
       background-image: linear-gradient(rgba(15,15,15,0.58), rgba(15,15,15,0.58)), var(--hero-mobile);
       background-repeat:no-repeat;
       background-size:cover;
-      background-position:center 30%; /* prioritize upper middle for vertical images */
+      background-position:center 30%;
       z-index:0;
     }
-    /* larger devices prefer different image */
     @media (min-width:900px){
       .hero{ background-image: linear-gradient(rgba(15,15,15,0.58), rgba(15,15,15,0.58)), var(--hero-desktop); background-position:center 36%;}
     }
@@ -74,9 +74,8 @@
       .hero{ background-image: linear-gradient(rgba(15,15,15,0.58), rgba(15,15,15,0.58)), var(--hero-fallback); background-position:center center;}
     }
 
-    /* safe-area padding so no text is clipped on Netlify or mobile UI bars */
+    /* safe-area padding fixes clipping */
     .hero-inner{max-width:980px;padding:calc(env(safe-area-inset-top, 24px) + 24px) var(--site-padding) calc(env(safe-area-inset-bottom,24px) + 24px);position:relative;z-index:2}
-    /* keep title within visible window: max size set to 140px (within requested 120-160 range) */
     .brand.hero-title{font-size:clamp(56px, 9vw, 140px);line-height:0.92}
     .hero-line{font-family:"Playfair Display",serif;font-style:italic;font-size:clamp(20px,3.2vw,48px);margin-top:18px;color:var(--platinum);letter-spacing:0.035em}
     .accent-underline{width:0;height:2px;background:var(--emerald);margin:28px auto 0;border-radius:2px;opacity:0;transition:width 1100ms ease 480ms,opacity 1200ms ease 480ms}
@@ -127,13 +126,10 @@
     .fade{opacity:0;transform:translateY(12px);transition:opacity 900ms ease,transform 900ms ease}
     .fade.in{opacity:1;transform:none}
     a.link-emerald:hover{color:var(--emerald);text-decoration:underline}
-    /* Square logo from vertical file */
-    .logo-square{
-      width:88px;height:88px;border-radius:8px;background-repeat:no-repeat;background-size:cover;background-position:center;margin:18px auto 0;
-      border:1px solid rgba(229,229,229,0.04);
-    }
-    /* use the vertical logo file but crop center into square */
-    .logo-square { background-image: url('/assets/Calyvent Logo possiblly.jpg'); }
+
+    /* Square logo from your vertical file (center-crop) */
+    .logo-square{width:88px;height:88px;border-radius:8px;background-repeat:no-repeat;background-size:cover;background-position:center;margin:18px auto 0;border:1px solid rgba(229,229,229,0.04)}
+    .logo-square { background-image: url('/Calyvent Logo possiblly.jpg'); }
 
     @media (max-width:1100px){ .clients{grid-template-columns:repeat(3,1fr)} .team-grid{grid-template-columns:repeat(2,1fr)} .philos-grid{grid-template-columns:1fr} }
     @media (max-width:640px){ .clients{grid-template-columns:repeat(2,1fr)} .team-photo{height:140px} .brand.hero-title{font-size:clamp(48px, 14vw, 96px)} .hero-line{font-size:20px} .menu-panel{width:92vw} .menu-nav a{font-size:16px} }
@@ -141,9 +137,6 @@
   </style>
 </head>
 <body>
-  <!-- Fallback favicon unchanged -->
-  <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="100%" height="100%" fill="%230F0F0F"/><text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Cinzel, serif" font-weight="700" font-size="30" fill="%23E5E5E5">CV</text></svg>'>
-
   <!-- Header & menu -->
   <header class="sitebar" role="banner" aria-hidden="true">
     <div class="container" style="display:flex;justify-content:flex-end">
@@ -161,7 +154,7 @@
     <div class="menu-logo">Calyvent</div>
     <div class="menu-tag">Clarity. Advantage. Forever.</div>
 
-    <!-- square-cropped logo from your vertical file (place assets/Calyvent Logo possiblly.jpg) -->
+    <!-- square-cropped logo -->
     <div class="logo-square" aria-hidden="true"></div>
 
     <nav class="menu-nav" role="navigation" aria-label="Primary">
@@ -237,7 +230,6 @@
               <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" class="input" required></div>
               <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" class="input" required></div>
 
-              <!-- revenue options as requested -->
               <div class="field">
                 <label for="revenue">Expected Annual Revenue</label>
                 <select id="revenue" name="revenue" required>
@@ -250,7 +242,6 @@
                 </select>
               </div>
 
-              <!-- message box (explicit and visible) -->
               <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Brief description (no attachments)"></textarea></div>
             </div>
             <div class="submit-row">
@@ -265,7 +256,7 @@
       </footer>
     </section>
 
-    <!-- other pages unchanged except message boxes & visuals remain present -->
+    <!-- SERVICES -->
     <section id="services" class="page" aria-labelledby="services-page-title">
       <div style="padding-top:36px"></div>
       <h1 id="services-page-title" class="section-title">Services — Detailed</h1>
@@ -280,6 +271,7 @@
       <div style="margin-top:36px"><button class="cta" id="back-home" style="padding:10px 18px">Return</button></div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about" class="page" aria-labelledby="about-title">
       <div style="padding-top:36px"></div>
       <h1 id="about-title" class="section-title">About</h1>
@@ -293,6 +285,7 @@
       <div style="margin-top:36px"><button class="cta" id="about-back">Return</button></div>
     </section>
 
+    <!-- CONTACT page (full) -->
     <section id="contact" class="page" aria-labelledby="contact-title">
       <div style="padding-top:36px"></div>
       <h1 id="contact-title" class="section-title">Contact — Private Inquiry</h1>
@@ -323,6 +316,7 @@
       <div style="margin-top:28px"><button class="cta" id="contact-return">Return</button></div>
     </section>
 
+    <!-- LEGAL -->
     <section id="legal" class="page" aria-labelledby="legal-title">
       <div style="padding-top:36px"></div>
       <h1 id="legal-title" class="section-title">Legal</h1>
@@ -331,12 +325,34 @@
     </section>
   </main>
 
-  <!-- Supabase SDK already in your previous file — keep that wiring as-is.
-       (This file preserves Supabase code you added earlier; not repeated here to avoid duplication.)
-       If you need the full single-file that also includes supabase code, say "single-file + supabase" and I'll inject the same supabase blocks back in. -->
+  <!-- Supabase SDK (UMD) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
 
   <script>
-    /* Lightweight JS: menu, routing, fade, safe hero underline, accordion, forms unchanged except nothing removed */
+    /* Supabase config (exact values you provided) */
+    const SUPABASE_URL = "https://offrohhavllnldqrofck.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mZnJvaGhhdmxsbmxkcXJvZmNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NjIzNzcsImV4cCI6MjA3OTIzODM3N30.fyUPt8W1Di9dFXKBqDAO0VOaMEmng2EQOPFyLE2RzIc";
+
+    // Correct, canonical initialization using the global `supabase` from the UMD build
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Insert helper
+    async function insertCalyventForm({ name, email, message, revenue }){
+      try{
+        const payload = { name, email, message, revenue };
+        const { data, error } = await supabase.from('calyventform').insert([ payload ]);
+        if(error) throw error;
+        console.log('Supabase insert success:', data);
+        return { success:true, data };
+      } catch(err){
+        console.error('Supabase insert error:', err);
+        return { success:false, error: err };
+      }
+    }
+  </script>
+
+  <script>
+    /* UI: menu, routing, hero, fades, accordion, and form bindings (only wiring differences requested) */
     (function(){
       const header = document.querySelector('header.sitebar');
       const menuBtn = document.getElementById('menu-toggle');
@@ -373,7 +389,6 @@
       window.addEventListener('popstate', (e) => { showPath(location.pathname, true); });
       showPath(location.pathname, true);
 
-      // Fade-in
       function observeFades(){
         const faders = Array.from(document.querySelectorAll('.fade'));
         const obs = new IntersectionObserver((entries, o) => {
@@ -383,7 +398,6 @@
       }
       observeFades();
 
-      // Accordion
       const accTriggers = Array.from(document.querySelectorAll('.acc-trigger'));
       accTriggers.forEach(btn => { btn.addEventListener('click', () => {
         const target = document.getElementById(btn.getAttribute('data-target'));
@@ -392,8 +406,80 @@
         if(!expanded){ btn.setAttribute('aria-expanded','true'); if(target){ target.classList.add('open'); } } else { btn.setAttribute('aria-expanded','false'); if(target){ target.classList.remove('open'); } }
       }); });
 
-      // Escape closes menu
       window.addEventListener('keydown', (ev) => { if(ev.key === 'Escape'){ closeMenu(); } });
+
+      /* --- Form wiring for both forms to Supabase --- */
+
+      // Homepage inquiry form
+      const inquiryForm = document.getElementById('inquiry-form');
+      if(inquiryForm){
+        const submitBtn = document.getElementById('inquiry-submit');
+        inquiryForm.addEventListener('submit', async function(e){
+          e.preventDefault();
+          const name = (this.querySelector('#name')||{value:''}).value.trim();
+          const email = (this.querySelector('#email')||{value:''}).value.trim();
+          const revenue = (this.querySelector('#revenue')||{value:''}).value;
+          const message = (this.querySelector('#message')||{value:''}).value.trim();
+
+          if(!name || !email || !revenue){
+            submitBtn.textContent = 'Complete required fields';
+            setTimeout(()=> submitBtn.textContent = 'Submit Private Inquiry', 1400);
+            return;
+          }
+
+          submitBtn.disabled = true; submitBtn.textContent = 'Sending...';
+          try{
+            const res = await insertCalyventForm({ name, email, message, revenue });
+            if(res.success){
+              submitBtn.textContent = 'Submitted';
+              this.reset();
+              setTimeout(()=> { submitBtn.disabled = false; submitBtn.textContent = 'Submit Private Inquiry'; }, 1400);
+            } else {
+              throw res.error || new Error('Insert failed');
+            }
+          } catch(err){
+            console.error('Form submit error:', err);
+            submitBtn.disabled = false; submitBtn.textContent = 'Error';
+            setTimeout(()=> submitBtn.textContent = 'Submit Private Inquiry', 1600);
+          }
+        });
+      }
+
+      // Contact page form
+      const contactForm = document.getElementById('contact-form');
+      if(contactForm){
+        const submitBtn2 = document.getElementById('contact-submit');
+        contactForm.addEventListener('submit', async function(e){
+          e.preventDefault();
+          const name = (this.querySelector('#full')||{value:''}).value.trim();
+          const email = (this.querySelector('#mail')||{value:''}).value.trim();
+          const revenue = (this.querySelector('#revenue2')||{value:''}).value;
+          const message = (this.querySelector('#msg')||{value:''}).value.trim();
+
+          if(!name || !email || !revenue){
+            submitBtn2.textContent = 'Complete required fields';
+            setTimeout(()=> submitBtn2.textContent = 'Submit Private Inquiry', 1400);
+            return;
+          }
+
+          submitBtn2.disabled = true; submitBtn2.textContent = 'Sending...';
+          try{
+            const res = await insertCalyventForm({ name, email, message, revenue });
+            if(res.success){
+              submitBtn2.textContent = 'Submitted';
+              this.reset();
+              setTimeout(()=> { submitBtn2.disabled = false; submitBtn2.textContent = 'Submit Private Inquiry'; }, 1400);
+            } else {
+              throw res.error || new Error('Insert failed');
+            }
+          } catch(err){
+            console.error('Contact form submit error:', err);
+            submitBtn2.disabled = false; submitBtn2.textContent = 'Error';
+            setTimeout(()=> submitBtn2.textContent = 'Submit Private Inquiry', 1600);
+          }
+        });
+      }
+
     })();
   </script>
 </body>
