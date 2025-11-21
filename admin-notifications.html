@@ -4,58 +4,44 @@
   <meta charset="utf-8">
   <title>Admin – Enable Notifications</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- These two lines make it a PWA (important for iOS & background notifications) -->
   <link rel="manifest" href="/manifest.json">
-  <link rel="icon" href="/favicon.ico">
 </head>
-<body>
+<body style="font-family: sans-serif; padding: 2rem;">
   <h1>Admin Notification Center</h1>
-  <button id="enable">Enable Push Notifications</button>
+  <button id="enable" style="padding: 1rem 2rem; font-size: 1.2rem;">Enable Push Notifications</button>
   <p id="status">Status: not subscribed</p>
 
   <script type="module">
-    const supabaseUrl = 'https://offrohhavllnldqrofck.supabase.co';
-    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mZnJvaGhhdmxsbmxkcXJvZmNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NjIzNzcsImV4cCI6MjA3OTIzODM3N30.fyUPt8W1Di9dFXKBqDAO0VOaMEmng2EQOPFyLE2RzIc';
+    const supabaseUrl = 'https://offrohhavllnldqrofck.supabase.co';       
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mZnJvaGhhdmxsbmxkcXJvZmNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NjIzNzcsImV4cCI6MjA3OTIzODM3N30.fyUPt8W1Di9dFXKBqDAO0VOaMEmng2EQOPFyLE2RzIc' ;                      
 
     import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-    const enableBtn = document.getElementById('enable');
-    const status = document.getElementById('status');
-
-    // VAPID public key (generate once – see step 2)
     const vapidPublicKey = 'BKMrtHn1zpg8k7pU-aXhmgMbtu0FKMWfKQQv1osfT7FNKwWAbwvlwYvONy0YJ-ip8G4RsIQWZvXwlU_fuA-6Luw';
 
-    async function subscribeToPush() {
-      if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
-        status.textContent = 'Push not supported on this browser';
-        return;
-      }
+    document.getElementById('enable').onclick = async () => {
+      const status = document.getElementById('status');
+      status.textContent = 'Registering service worker...';
 
-      const registration = await navigator.serviceWorker.register('/sw.js');
-      const sub = await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: vapidPublicKey
-      });
+      try {
+        const reg = await navigator.serviceWorker.register('/sw.js');
+        await navigator.serviceWorker.ready;
 
-      // Save the subscription in Supabase so we can send pushes later
-      const { error } = await supabase
-        .from('push_subscriptions')
-        .upsert({
-          user_id: (await supabase.auth.getUser())?.data.user?.id || 'admin', // or hard-code your admin uuid
-          subscription: sub.toJSON(),
-          updated_at: new Date().toISOString()
+        const sub = await reg.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: vapidPublicKey
         });
 
-      if (error) {
-        status.textContent = 'Failed: ' + error.message;
-      } else {
-        status.textContent = '✅ Subscribed! You will now get notifications even when tab is closed';
-        enableBtn.disabled = true;
-      }
-    }
+        await supabase.from('push_subscriptions').upsert({ subscription: sub.toJSON() });
 
-    enableBtn.addEventListener('click', subscribeToPush);
+        status.textContent = 'Success! You will now get notifications even when the site is closed!';
+        document.getElementById('enable').disabled = true;
+      } catch (err) {
+        status.textContent = 'Error: ' + err.message;
+        console.error(err);
+      }
+    };
   </script>
 </body>
 </html>
